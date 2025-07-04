@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Blog Post</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Create New Blog Post</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="create.html">Create</a>
+    </nav>
+  </header>
+  <main>
+    <form id="create-form">
+      <input type="text" id="title" placeholder="Title" required />
+      <textarea id="content" placeholder="Content" required></textarea>
+      <input type="text" id="image" placeholder="Image URL (optional)" />
+      <button type="submit">Add Post</button>
+    </form>
+  </main>
+  <footer>&copy; 2025 My Blog</footer>
+  <script>
+    document.getElementById('create-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const title = document.getElementById('title').value;
+      const content = document.getElementById('content').value;
+      const image = document.getElementById('image').value || 'images/post1.jpg';
+      const newPost = { title, content, image };
+      const existingPosts = JSON.parse(localStorage.getItem('posts') || '[]');
+      existingPosts.unshift(newPost);
+      localStorage.setItem('posts', JSON.stringify(existingPosts));
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>
